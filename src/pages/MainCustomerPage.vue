@@ -1,10 +1,8 @@
 <template>
   <q-page>
-    <q-page-container>
       <q-list>
         <property-item v-for="property in properties" :key="property.id" :property="property" />
       </q-list>
-    </q-page-container>
 
   </q-page>
 </template>
@@ -20,10 +18,26 @@ import PropertyItem from './PropertyItem.vue'
         price: 'C$ 12000.00',
         location: 'Las Colinas, Managua',
         available: true,
-        image: 'link_to_image.jpg'
+        image: 'assets/casa.jpg'
       },
       {
         id: 2,
+        title: 'Apartamentos disponibles',
+        price: 'C$ 1200.00',
+        location: 'Metrocentro, Managua',
+        available: true,
+        image: 'assets/apartamentos.jpg'
+      },
+      {
+        id: 3,
+        title: 'Casa de con dos cuartos y un baño',
+        price: 'C$ 12000.00',
+        location: 'Las Colinas, Managua',
+        available: true,
+        image: 'assets/casa.jpg'
+      },
+      {
+        id: 4,
         title: 'Apartamentos disponibles',
         price: 'C$ 1200.00',
         location: 'Metrocentro, Managua',
