@@ -2,7 +2,7 @@
   <q-card class="q-mb-sm q-pa-sm small-card row no-wrap">
     <q-img :src="property.image" :alt="property.title" class="small-image col-auto q-pa-md" />
 
-    <q-card-section class="q-pa-sm col">
+    <q-card-section class=" dragElement  col">
       <div class="text-subtitle2">{{ property.title }}</div>
       <div class="text-body2">{{ property.price }}</div>
       <br>
@@ -13,20 +13,33 @@
       <div class="q-mt-md flex justify-between" style="padding: 0%;">
         <q-chip dense color="green" icon="check_circle" label="Disponible" v-if="property.available" />
         <q-btn icon="visibility" class="rounded-borders" label="Ver" color="primary" @click="onViewClick" />
+        <q-btn icon="edit" class="rounded-borders" label="Editar" color="green" @click="onEditClick" />
+        <q-btn icon="delete" class="rounded-borders" label="Borrar" color="red" @click="onDeleteClick" />
       </div>
     </q-card-section>
   </q-card>
+  <edit-property ref="editDialog" :property="property" style="min-width: 500px;" />
 </template>
 
-<script>
-export default {
-  props: {
-    property: {
-      type: Object,
-      required: true
-    }
+<script setup>
+import editProperty from 'src/components/editProperty.vue';
+import { ref } from 'vue'
+
+const editDialog = ref(null)
+
+const props = defineProps({
+  property: {
+    type: Object,
+    required: true
   }
+});
+
+const onViewClick = () => {
 }
+const onEditClick = () => {
+  editDialog.value.openDialog()
+}
+
 </script>
 
 <style scoped>
@@ -67,5 +80,9 @@ export default {
 
 .q-chip {
   margin-top: 4px;
+}
+
+.q-card {
+  min-width: 500px !important;
 }
 </style>

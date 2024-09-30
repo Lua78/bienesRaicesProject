@@ -7,12 +7,19 @@ const routes = [
     ],
   },
   {
-    path: "/admin",
+    path: "/login",
     component: () => import("layouts/EmptyLayout.vue"),
     children: [
-      { path: "login", component: () => import("pages/LoginPage.vue") },
+      { path: "", component: () => import("pages/LoginPage.vue") },
       { path: "recovery", component: () => import("pages/RecoveryPage.vue") },
-      { path: "reset", component: () => import("pages/ResetPasswordPage.vue") }
+      { path: "reset", component: () => import("pages/ResetPasswordPage.vue") },
+    ],
+  },
+  {
+    path: "/admin",
+    component: () => import("layouts/AdminLayout.vue"),
+    children: [
+      { path: "", component: () => import("pages/MainAdminPage.vue") },
     ],
   },
 

@@ -1,16 +1,49 @@
 <template>
   <q-layout view="hHh lpR fFf">
     <q-header class="header text-white q-pa-md" height-hint="98">
-      <q-toolbar class="justify-between">
-        <div class="my-input my-search">
-          <q-input outlined dense v-model="searchQuery" placeholder="Buscar..." class="mw col-4">
-            <template v-slot:append>
-              <q-btn flat round icon="search" />
-            </template>
-          </q-input>
-        </div>
-      </q-toolbar>
     </q-header>
+    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
+      <div class="q-pa-md">
+        <img src="/assets/logo.png" class="img-acoplada">
+
+        <!-- Lista de ítems -->
+        <q-list>
+
+          <!-- Ítem 1: Agregar una propiedad -->
+          <q-item clickable v-ripple class="item-clickable">
+            <q-item-section avatar>
+              <q-icon name="home" />
+            </q-item-section>
+            <q-item-section>
+              Agregar una propiedad
+            </q-item-section>
+          </q-item>
+
+          <!-- Ítem 2: Editar categorías -->
+          <q-item clickable v-ripple class="item-clickable">
+            <q-item-section avatar>
+              <q-icon name="category" />
+            </q-item-section>
+            <q-item-section>
+              Editar categorías
+            </q-item-section>
+          </q-item>
+
+          <!-- Ítem 3: Editar perfil de contacto -->
+          <q-item clickable v-ripple class="item-clickable">
+            <q-item-section avatar>
+              <q-icon name="person" />
+            </q-item-section>
+            <q-item-section>
+              Editar perfil de contacto
+            </q-item-section>
+          </q-item>
+
+        </q-list>
+      </div>
+    </q-drawer>
+
+
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -93,5 +126,14 @@ const options = [
 
 .mh2 {
   max-height: 45px;
+}
+.item-clickable {
+  background-color: #f0f0f0; /* Fondo gris claro */
+  border-radius: 10px; /* Bordes redondeados */
+  margin-bottom: 10px; /* Espacio entre los ítems */
+}
+
+.item-clickable:hover {
+  background-color: #e0e0e0; /* Cambia el color cuando se pasa el mouse */
 }
 </style>

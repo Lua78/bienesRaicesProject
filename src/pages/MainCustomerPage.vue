@@ -16,6 +16,7 @@ import PropertyItem from './PropertyItem.vue'
         id: 1,
         title: 'Casa de con dos cuartos y un baño',
         price: 'C$ 12000.00',
+        type: 'Venta',
         location: 'Las Colinas, Managua',
         available: true,
         image: 'assets/casa.jpg'
@@ -25,6 +26,7 @@ import PropertyItem from './PropertyItem.vue'
         title: 'Apartamentos disponibles',
         price: 'C$ 1200.00',
         location: 'Metrocentro, Managua',
+        type: 'Alquiler',
         available: true,
         image: 'assets/apartamentos.jpg'
       },
@@ -32,6 +34,7 @@ import PropertyItem from './PropertyItem.vue'
         id: 3,
         title: 'Casa de con dos cuartos y un baño',
         price: 'C$ 12000.00',
+        type: 'Venta',
         location: 'Las Colinas, Managua',
         available: true,
         image: 'assets/casa.jpg'
@@ -40,6 +43,7 @@ import PropertyItem from './PropertyItem.vue'
         id: 4,
         title: 'Apartamentos disponibles',
         price: 'C$ 1200.00',
+        type: 'Alquiler',
         location: 'Metrocentro, Managua',
         available: true,
         image: 'link_to_image.jpg'
