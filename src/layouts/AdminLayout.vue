@@ -10,7 +10,7 @@
         <q-list>
 
           <!-- Ítem 1: Agregar una propiedad -->
-          <q-item clickable v-ripple class="item-clickable">
+          <q-item clickable v-ripple class="item-clickable" @click="create()">
             <q-item-section avatar>
               <q-icon name="home" />
             </q-item-section>
@@ -49,41 +49,24 @@
     </q-page-container>
 
   </q-layout>
+
+  <create-property ref="createDialog" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import CreateProperty from 'src/components/CreateProperty.vue';
 
 const leftDrawerOpen = ref(false)
 const rightDrawerOpen = ref(false)
-const searchQuery = ref('')
-const priceRange = ref([3000, 40000])
-const onlyAvailable = ref(false)
-const filterBy = ref({
-  icon: "home",
-  name: "Todos"
-})
-
-const options = [
-  {
-    icon: "home",
-    name: "Todos"
-  },
-  {
-    icon: "home",
-    name: "Casas"
-  },
-  {
-    icon: "store",
-    name: "Bodegas"
-  },
-  {
-    icon: "apartment",
-    name: "Departamentos"
-  }
-]
+const createDialog = ref(null)
 
 
+function create() {
+  console.log('aaaaaaaaaaaaaaa')
+  console.log(createDialog.value)
+  createDialog.value.openDialog()
+}
 
 </script>
 
@@ -127,13 +110,18 @@ const options = [
 .mh2 {
   max-height: 45px;
 }
+
 .item-clickable {
-  background-color: #f0f0f0; /* Fondo gris claro */
-  border-radius: 10px; /* Bordes redondeados */
-  margin-bottom: 10px; /* Espacio entre los ítems */
+  background-color: #f0f0f0;
+  /* Fondo gris claro */
+  border-radius: 10px;
+  /* Bordes redondeados */
+  margin-bottom: 10px;
+  /* Espacio entre los ítems */
 }
 
 .item-clickable:hover {
-  background-color: #e0e0e0; /* Cambia el color cuando se pasa el mouse */
+  background-color: #e0e0e0;
+  /* Cambia el color cuando se pasa el mouse */
 }
 </style>

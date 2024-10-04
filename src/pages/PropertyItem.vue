@@ -1,6 +1,6 @@
 <template>
   <q-card class="q-mb-sm q-pa-sm small-card row no-wrap">
-    <q-img :src="property.image" :alt="property.title" class="small-image col-auto q-pa-md" />
+    <q-img :src="image" :alt="property.title" class="small-image col-auto q-pa-md" />
 
     <q-card-section class="q-pa-sm col">
       <div class="text-subtitle2">{{ property.title }}</div>
@@ -18,15 +18,33 @@
   </q-card>
 </template>
 
-<script>
-export default {
-  props: {
-    property: {
-      type: Object,
-      required: true
-    }
+<script setup>
+
+import { onMounted, ref } from 'vue';
+const props = defineProps({
+  property: {
+    type: {
+      id: Number,
+      title: String,
+      price: Number,
+      location: String,
+      type: String,
+      available: Boolean,
+      images: Array
+    },
+    required: true
   }
-}
+})
+const image = ref('/assets/defaultHouse.webp')
+onMounted(() => {
+  const images = props.property.images
+  if (images.length > 0) {
+    image.value = images[0];
+    console.log(images)
+  }
+})
+
+
 </script>
 
 <style scoped>

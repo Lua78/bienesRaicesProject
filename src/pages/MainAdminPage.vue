@@ -19,7 +19,7 @@ const properties = ref([
     type: 'Venta',
     location: 'Las Colinas, Managua',
     available: true,
-    image: 'assets/casa.jpg'
+    images: ['assets/casa.jpg','assets/apartamentos.jpg']
   },
   {
     id: 2,
@@ -28,7 +28,7 @@ const properties = ref([
     location: 'Metrocentro, Managua',
     type: 'Alquiler',
     available: true,
-    image: 'assets/apartamentos.jpg'
+    images: ['assets/apartamentos.jpg']
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const properties = ref([
     type: 'Venta',
     location: 'Las Colinas, Managua',
     available: true,
-    image: 'assets/casa.jpg'
+    images: ['assets/casa.jpg']
   },
   {
     id: 4,
@@ -46,7 +46,7 @@ const properties = ref([
     type: 'Alquiler',
     location: 'Metrocentro, Managua',
     available: true,
-    image: 'link_to_image.jpg'
+    images: []
   },
   // Agrega más propiedades aquí...
 ])
