@@ -2,6 +2,7 @@ package com.api.globalState.entities.properties;
 
 
 import com.api.globalState.entities.FileEntity;
+import com.api.globalState.entities.auth.UserEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -34,6 +35,10 @@ public class PropertyEntity {
     @ManyToOne
     @JsonIgnore
     private OwnerPropertyEntity owner;
+
+    @ManyToOne
+    @JsonIgnore
+    private UserEntity creator;
 
     @ManyToOne
     private StatePropertyEntity stateProperty;

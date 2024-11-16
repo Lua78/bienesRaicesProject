@@ -1,13 +1,16 @@
 package com.api.globalState.entities.auth;
 
 
+import com.api.globalState.entities.properties.PropertyEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Calendar;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,6 +23,9 @@ public class UserEntity {
     private String lastName;
 
     private String email;
+
+    @OneToMany
+    private List<PropertyEntity> properties;
 
     @CreationTimestamp
     private Calendar dateCreation;
