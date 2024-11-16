@@ -8,7 +8,7 @@
       <q-form @submit="onSubmit" @reset="onReset" style="min-width: 450px;">
         <!-- Título -->
         <q-card-section>
-          <q-input v-model="propertyData.title" label="Título" filled />
+          <q-input v-model="propertyData.title" label="Nombre de la propiedad" filled />
         </q-card-section>
 
         <!-- Precio -->
@@ -19,6 +19,11 @@
         <!-- Tipo -->
         <q-card-section>
           <q-select v-model="propertyData.type" :options="['Venta', 'Alquiler']" label="Tipo" filled />
+        </q-card-section>
+
+        <!-- Categoria -->
+        <q-card-section>
+          <q-select v-model="propertyData.type" :options="['Casa', 'Bodega', 'Departamento']" label="Categoria" filled />
         </q-card-section>
 
         <!-- Ubicación -->

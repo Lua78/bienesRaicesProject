@@ -5,7 +5,7 @@
       <q-card-section style="width: 100%;">
         <q-input class="my-input" label="Nombre de usuario o correo" v-model="user" />
         <q-input label="Contraseña" v-model="pass" type="password" />
-        <a href="/admin/recovery">¿Olvidó su contraseña?</a>
+        <a href="/login/recovery">¿Olvidó su contraseña?</a>
         <div class="q-mt-md" style="padding: 0%;">
           <q-btn icon="check" class="rounded-borders" label="Iniciar sesión" color="green" @click="login" />
         </div>

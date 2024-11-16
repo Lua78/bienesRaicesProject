@@ -21,6 +21,11 @@
           <q-select v-model="propertyData.type" :options="['Venta', 'Alquiler']" label="Tipo" filled />
         </q-card-section>
 
+        <!-- Categoria -->
+        <q-card-section>
+          <q-select v-model="propertyData.category" :options="['Casa', 'Bodega', 'Departamento']" label="Categoria" filled />
+        </q-card-section>
+
         <!-- Ubicación -->
         <q-card-section>
           <q-input v-model="propertyData.location" label="Ubicación" filled />

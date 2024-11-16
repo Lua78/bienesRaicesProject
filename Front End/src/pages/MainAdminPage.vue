@@ -17,16 +17,18 @@ const properties = ref([
     title: 'Casa de con dos cuartos y un baño',
     price: 'C$ 12000.00',
     type: 'Venta',
+    category: 'Casa',
     location: 'Las Colinas, Managua',
     available: true,
     images: ['assets/casa.jpg','assets/apartamentos.jpg']
   },
   {
     id: 2,
-    title: 'Apartamentos disponibles',
+    title: 'Departamentos disponibles',
     price: 'C$ 1200.00',
     location: 'Metrocentro, Managua',
     type: 'Alquiler',
+    category: 'Departamento',
     available: true,
     images: ['assets/apartamentos.jpg']
   },
@@ -34,6 +36,7 @@ const properties = ref([
     id: 3,
     title: 'Casa de con dos cuartos y un baño',
     price: 'C$ 12000.00',
+    category: 'Casa',
     type: 'Venta',
     location: 'Las Colinas, Managua',
     available: true,
@@ -41,14 +44,14 @@ const properties = ref([
   },
   {
     id: 4,
-    title: 'Apartamentos disponibles',
+    title: 'Departamentos disponibles',
     price: 'C$ 1200.00',
     type: 'Alquiler',
+    category: 'Departamento',
     location: 'Metrocentro, Managua',
-    available: true,
+    available: false,
     images: []
   },
-  // Agrega más propiedades aquí...
 ])
 
 </script>
