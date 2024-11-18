@@ -1,10 +1,7 @@
 package com.api.globalState.entities.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,6 +11,7 @@ import java.util.Calendar;
 @Entity
 @Data
 public class LoginEntity {
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long idLogin;
 

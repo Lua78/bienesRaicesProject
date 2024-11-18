@@ -17,6 +17,7 @@ import java.util.List;
 @Entity
 public class PropertyEntity {
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long idProperty;
 

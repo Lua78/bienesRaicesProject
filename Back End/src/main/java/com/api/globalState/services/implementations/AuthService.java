@@ -8,6 +8,7 @@ import com.api.globalState.entities.auth.UserEntity;
 import com.api.globalState.repositories.auth.LoginRepository;
 import com.api.globalState.repositories.auth.UserRepository;
 import com.api.globalState.services.interfaces.IAuthService;
+import com.api.globalState.utils.Jwt.JwtManager;
 import com.api.globalState.utils.exceptions.ResponseException;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +18,12 @@ public class AuthService implements IAuthService {
 
     private final LoginRepository loginRepository;
     private final UserRepository userRepository;
+    private final JwtManager jwtManager;
 
-    public AuthService(LoginRepository loginRepository, UserRepository userRepository) {
+    public AuthService(LoginRepository loginRepository, UserRepository userRepository, JwtManager jwtManager) {
         this.loginRepository = loginRepository;
         this.userRepository = userRepository;
+        this.jwtManager = jwtManager;
     }
 
     @Override
@@ -35,6 +38,7 @@ public class AuthService implements IAuthService {
         LoginEntity login = data.getLogin().toEntity();
         login.setUser(user);
         login = loginRepository.save(login);
-        return new LoginResponseDto(login, user);
+        String token = jwtManager.generateToken(login.getIdLogin().intValue(), login.getUsername(), login.getRol().getName());
+        return new LoginResponseDto(login, user, token);
     }
 }

@@ -1,9 +1,7 @@
 package com.api.globalState.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NonNull;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,6 +13,8 @@ import java.util.List;
 @Data
 @Entity
 public class TypeFileEntity {
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long idTypeFile;
 

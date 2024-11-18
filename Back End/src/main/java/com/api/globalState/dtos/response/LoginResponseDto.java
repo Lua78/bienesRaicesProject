@@ -12,9 +12,12 @@ public class LoginResponseDto {
 
     private String username;
 
-    public LoginResponseDto(LoginEntity login, UserEntity user){
+    private String token;
+
+    public LoginResponseDto(LoginEntity login, UserEntity user, String token){
         this.user = new UserResponseDto(user);
         this.idLogin = login.getIdLogin();
         this.username = login.getUsername();
+        this.token = token;
     }
 }

@@ -11,6 +11,8 @@ import java.util.Calendar;
 @Entity
 @Data
 public class FileEntity {
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long idFile;
 

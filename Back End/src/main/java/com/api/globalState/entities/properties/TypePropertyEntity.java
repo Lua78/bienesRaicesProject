@@ -1,9 +1,7 @@
 package com.api.globalState.entities.properties;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -14,6 +12,8 @@ import java.util.List;
 @Entity
 @Data
 public class TypePropertyEntity {
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long idTypeProperty;
 
