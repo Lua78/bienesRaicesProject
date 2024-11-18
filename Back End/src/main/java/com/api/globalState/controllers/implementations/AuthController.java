@@ -10,7 +10,6 @@ import com.api.globalState.utils.exceptions.ResponseException;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
@@ -23,7 +22,7 @@ public class AuthController implements IAuthController {
     }
 
     @Override
-    public ResponseEntity<GenericResponse<LoginResponseDto>> registerWithLogin(@Validated RegisterWithLoginDto body) throws ResponseException {
+    public ResponseEntity<GenericResponse<LoginResponseDto>> registerWithLogin(@Valid RegisterWithLoginDto body) throws ResponseException {
         return ResponseEntity.ok().body(new GenericResponse<>(authService.registerUserLogin(body),"OK", HttpStatus.OK));
     }
 
