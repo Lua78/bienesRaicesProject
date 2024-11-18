@@ -1,5 +1,6 @@
 package com.api.globalState.utils.exceptions;
 
+import com.api.globalState.utils.GenericResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = ResponseException.class)
-    protected ResponseEntity<ResponseException> handleResponseException(ResponseException ex) {
-        return ResponseEntity.badRequest().body(ex);
+    protected ResponseEntity<GenericResponse> handleResponseException(ResponseException ex) {
+        return ResponseEntity.badRequest().body(new GenericResponse<>(ex.getMessage()));
     }
 }

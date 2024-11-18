@@ -2,15 +2,16 @@ package com.api.globalState.dtos.request;
 
 import com.api.globalState.entities.auth.UserEntity;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
 public class RegisterUerDto {
-    @NotEmpty
+    @NotBlank
     private String name;
 
-    @NotEmpty
+    @NotBlank
     private String lastName;
 
     @Email

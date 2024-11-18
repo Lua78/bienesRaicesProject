@@ -13,14 +13,14 @@ import java.util.Calendar;
 public class LoginEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long idLogin;
+    private Integer idLogin;
 
     private String username;
 
     @JsonIgnore
     private String password;
 
-    @OneToOne
+    @ManyToOne
     private RolEntity rol;
 
     @OneToOne

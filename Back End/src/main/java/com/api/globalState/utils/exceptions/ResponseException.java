@@ -8,8 +8,8 @@ import java.util.List;
 public class ResponseException extends Exception {
 
     @Getter
-    public HttpStatus code = HttpStatus.BAD_REQUEST;
-    public List<String> messages;
+    private HttpStatus code = HttpStatus.BAD_REQUEST;
+    private String message;
 
     public ResponseException(String msg) {
         super(msg);
@@ -20,7 +20,4 @@ public class ResponseException extends Exception {
         this.code = code;
     }
 
-    public List<String> getMessagesList() {
-        return messages;
-    }
 }

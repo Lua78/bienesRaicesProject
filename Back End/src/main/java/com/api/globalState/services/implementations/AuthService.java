@@ -10,11 +10,12 @@ import com.api.globalState.repositories.auth.UserRepository;
 import com.api.globalState.services.interfaces.IAuthService;
 import com.api.globalState.utils.Jwt.JwtManager;
 import com.api.globalState.utils.exceptions.ResponseException;
+import jakarta.transaction.Transactional;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
 public class AuthService implements IAuthService {
-
 
     private final LoginRepository loginRepository;
     private final UserRepository userRepository;
@@ -27,18 +28,31 @@ public class AuthService implements IAuthService {
     }
 
     @Override
+    @Transactional(rollbackOn = Exception.class)
     public LoginResponseDto registerUserLogin(RegisterWithLoginDto data) throws ResponseException {
-       boolean existUsername = loginRepository.existsByUsername(data.getLogin().getUsername());
-       if (existUsername)
-           throw  new ResponseException("Username already in use");
-       boolean existEmail = userRepository.existsByEmail(data.getUser().getEmail());
-        if (existEmail)
-            throw  new ResponseException("Email already in use");
-        UserEntity user = userRepository.save(data.getUser().toEntity());
-        LoginEntity login = data.getLogin().toEntity();
-        login.setUser(user);
-        login = loginRepository.save(login);
-        String token = jwtManager.generateToken(login.getIdLogin().intValue(), login.getUsername(), login.getRol().getName());
-        return new LoginResponseDto(login, user, token);
+        try {
+            boolean existUsername = loginRepository.existsByUsername(data.getLogin().getUsername());
+            if (existUsername)
+                throw new ResponseException("Username already in use");
+            boolean existEmail = userRepository.existsByEmail(data.getUser().getEmail());
+            if (existEmail)
+                throw new ResponseException("Email already in use");
+            UserEntity user = userRepository.save(data.getUser().toEntity());
+
+            LoginEntity login = data.getLogin().toEntity();
+            login.setUser(user);
+
+            login = loginRepository.save(login);
+
+            String token = jwtManager.generateToken(
+                    login.getIdLogin().intValue(),
+                    login.getUsername(),
+                    login.getRol().getName()
+            );
+            return new LoginResponseDto(login, user, token);
+        } catch (DataIntegrityViolationException ex) {
+            throw new ResponseException("A database constraint was violated: " + ex.getMessage());
+        }
     }
+
 }
