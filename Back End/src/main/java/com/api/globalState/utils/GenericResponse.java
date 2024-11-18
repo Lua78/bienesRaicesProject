@@ -4,19 +4,41 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 public class GenericResponse<T> {
     private T body;
-    private String message;
+    private List<String> messages;
     private HttpStatus status = HttpStatus.BAD_REQUEST;
 
     public GenericResponse(String message, HttpStatus httpStatus){
-        this.message = message;
+        this.messages = List.of(message);
         this.status = httpStatus;
+    }
+    public GenericResponse(String message, T body){
+        this.messages = List.of(message);
+        this.body = body;
     }
 
     public GenericResponse(String message){
-        this.message = message;
+        this.messages = List.of(message);
+    }
+    public GenericResponse(List<String> messages){
+        this.messages = messages;
+    }
+    public GenericResponse(List<String> messages, HttpStatus httpStatus){
+        this.messages = messages;
+        this.status = httpStatus;
+    }
+    public GenericResponse(List<String> messages, T body){
+        this.messages = messages;
+        this.body = body;
+    }
+    public GenericResponse(T body, String message, HttpStatus httpStatus){
+        this.messages = List.of(message);
+        this.body = body;
+        this.status = httpStatus;
     }
 }
