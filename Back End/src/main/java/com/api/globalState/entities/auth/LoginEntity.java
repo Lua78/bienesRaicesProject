@@ -15,7 +15,7 @@ import java.util.Calendar;
 @Data
 public class LoginEntity {
     @Id
-    private Long id_login;
+    private Long idLogin;
 
     private String username;
 
@@ -24,6 +24,9 @@ public class LoginEntity {
 
     @OneToOne
     private RolEntity rol;
+
+    @OneToOne
+    private UserEntity user;
 
     @CreationTimestamp
     private Calendar dateCreation;
