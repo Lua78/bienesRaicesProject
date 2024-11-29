@@ -8,6 +8,7 @@ import com.api.globalState.entities.auth.UserEntity;
 import com.api.globalState.repositories.auth.LoginRepository;
 import com.api.globalState.repositories.auth.UserRepository;
 import com.api.globalState.services.interfaces.IAuthService;
+import com.api.globalState.utils.Jwt.Hash;
 import com.api.globalState.utils.Jwt.JwtManager;
 import com.api.globalState.utils.exceptions.ResponseException;
 import jakarta.transaction.Transactional;
@@ -49,10 +50,22 @@ public class AuthService implements IAuthService {
                     login.getUsername(),
                     login.getRol().getName()
             );
-            return new LoginResponseDto(login, user, token);
+            return new LoginResponseDto(login, token);
         } catch (DataIntegrityViolationException ex) {
             throw new ResponseException("A database constraint was violated: " + ex.getMessage());
         }
     }
+
+    @Override
+    public LoginResponseDto login(LoginDto data) throws ResponseException {
+        LoginEntity loginEntity = loginRepository.findByUsername(data.getUsername()).orElseThrow(()-> new RuntimeException("Wrong username or password"));
+
+        if(!Hash.sha3256(data.getPassword()).equals(loginEntity.getPassword()))
+            throw new ResponseException("Wrong username or password");
+        String token = jwtManager.generateToken(loginEntity.getIdLogin(),loginEntity.getUsername(),loginEntity.getRol().getName());
+
+        return new LoginResponseDto(loginEntity, token);
+    }
+
 
 }

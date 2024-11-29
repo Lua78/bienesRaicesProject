@@ -19,7 +19,7 @@ public class PropertyEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long idProperty;
+    private Integer idProperty;
 
     private String name;
 
@@ -30,15 +30,12 @@ public class PropertyEntity {
     private BigDecimal price;
 
     @OneToMany
-    @JsonIgnore
     private List<FileEntity> files;
 
     @ManyToOne
-    @JsonIgnore
     private OwnerPropertyEntity owner;
 
     @ManyToOne
-    @JsonIgnore
     private UserEntity creator;
 
     @ManyToOne

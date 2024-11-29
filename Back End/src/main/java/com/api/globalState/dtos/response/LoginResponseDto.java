@@ -14,8 +14,8 @@ public class LoginResponseDto {
 
     private String token;
 
-    public LoginResponseDto(LoginEntity login, UserEntity user, String token){
-        this.user = new UserResponseDto(user);
+    public LoginResponseDto(LoginEntity login, String token){
+        this.user = new UserResponseDto(login.getUser());
         this.idLogin = login.getIdLogin();
         this.username = login.getUsername();
         this.token = token;

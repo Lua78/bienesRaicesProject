@@ -8,4 +8,6 @@ import com.api.globalState.utils.exceptions.ResponseException;
 public interface IAuthService {
 
     LoginResponseDto registerUserLogin(RegisterWithLoginDto data) throws ResponseException;
+
+    LoginResponseDto login(LoginDto data) throws ResponseException;
 }
