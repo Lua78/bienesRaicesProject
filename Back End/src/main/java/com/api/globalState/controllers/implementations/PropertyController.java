@@ -4,8 +4,10 @@ import com.api.globalState.controllers.interfaces.IPropertyController;
 import com.api.globalState.dtos.request.SearchParamsDto;
 import com.api.globalState.entities.properties.PropertyEntity;
 import com.api.globalState.services.implementations.PropertyService;
+import com.api.globalState.utils.GenericResponse;
 import com.api.globalState.utils.Jwt.JwtManager;
 import com.api.globalState.utils.exceptions.ResponseException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -22,33 +24,33 @@ public class PropertyController implements IPropertyController {
     }
 
     @Override
-    public List<PropertyEntity> getAllProperties(SearchParamsDto params) {
-        return propertyService.getAll();
+    public ResponseEntity<GenericResponse<List<PropertyEntity>>> getAllProperties(SearchParamsDto params) {
+        return ResponseEntity.ok().body(new GenericResponse<>("success", propertyService.getAll()));
     }
 
     @Override
-    public PropertyEntity getProperty(Integer idProperty) throws ResponseException {
-        return propertyService.getById(idProperty);
+    public ResponseEntity<GenericResponse<PropertyEntity>> getProperty(Integer idProperty) throws ResponseException {
+        return ResponseEntity.ok().body(new GenericResponse<>("success", propertyService.getById(idProperty)));
     }
 
     @Override
-    public PropertyEntity updateProperty(Integer idProperty, PropertyEntity property, String token) throws ResponseException {
+    public ResponseEntity<GenericResponse<PropertyEntity>> updateProperty(Integer idProperty, PropertyEntity property, String token) throws ResponseException {
         if(!jwtManager.isThisRole(token, "admin"))
             throw new ResponseException("dont have permission for this path");
-        return propertyService.updateProperty(property, idProperty);
+        return ResponseEntity.ok().body(new GenericResponse<>("success", propertyService.updateProperty(property, idProperty)));
     }
 
     @Override
-    public PropertyEntity createProperty(PropertyEntity property, String token) throws ResponseException {
+    public ResponseEntity<GenericResponse<PropertyEntity>> createProperty(PropertyEntity property, String token) throws ResponseException {
         if(!jwtManager.isThisRole(token, "admin"))
             throw new ResponseException("dont have permission for this path");
-        return propertyService.createProperty(property);
+        return ResponseEntity.ok().body(new GenericResponse<>("success", propertyService.createProperty(property)));
     }
 
     @Override
-    public PropertyEntity deleteProperty(Integer idProperty, String token) throws ResponseException {
+    public ResponseEntity<GenericResponse<PropertyEntity>> deleteProperty(Integer idProperty, String token) throws ResponseException {
         if(!jwtManager.isThisRole(token, "admin"))
             throw new ResponseException("dont have permission for this path");
-        return propertyService.deleteProperty(idProperty);
+        return ResponseEntity.ok().body(new GenericResponse<>("success", propertyService.deleteProperty(idProperty)));
     }
 }

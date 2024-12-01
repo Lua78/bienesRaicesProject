@@ -4,5 +4,5 @@ import com.api.globalState.entities.properties.PropertyCategoryEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
-public interface CategoryPropertyRepository extends JpaRepository<PropertyCategoryEntity, Integer>, JpaSpecificationExecutor<PropertyCategoryEntity> {
+public interface PropertyCategoryRepository extends JpaRepository<PropertyCategoryEntity, Integer>, JpaSpecificationExecutor<PropertyCategoryEntity> {
 }
