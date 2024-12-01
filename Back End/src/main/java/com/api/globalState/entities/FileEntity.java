@@ -10,6 +10,7 @@ import java.util.Calendar;
 
 @Entity
 @Data
+@Table(name = "file")
 public class FileEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +22,7 @@ public class FileEntity {
     private String path;
 
     @ManyToOne
-    private TypeFileEntity typeFile;
+    private FileTypeEntity typeFile;
 
     @CreationTimestamp
     private Calendar dateCreation;

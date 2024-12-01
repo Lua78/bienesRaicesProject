@@ -1,27 +1,30 @@
 package com.api.globalState.entities.properties;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Calendar;
+import java.util.List;
 
-@Entity
 @Data
-public class CategoryPropertyEntity {
+@Entity
+@Table(name = "property_state")
+public class PropertyStateEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long idCategoryProperty;
+    private Long idPropertyStateEntity;
 
     private String name;
 
     private String description;
+
+    @OneToMany
+    @JsonIgnore
+    private List<PropertyEntity> properties;
 
     @CreationTimestamp
     private Calendar dateCreation;
@@ -30,5 +33,4 @@ public class CategoryPropertyEntity {
     private Calendar dateLastUpdate;
 
     private boolean active = true;
-
 }

@@ -10,6 +10,7 @@ import java.util.Calendar;
 
 @Entity
 @Data
+@Table(name = "login")
 public class LoginEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id

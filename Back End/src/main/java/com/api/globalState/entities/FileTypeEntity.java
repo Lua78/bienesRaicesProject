@@ -1,4 +1,4 @@
-package com.api.globalState.entities.properties;
+package com.api.globalState.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
@@ -11,19 +11,20 @@ import java.util.List;
 
 @Data
 @Entity
-public class StatePropertyEntity {
+@Table(name = "file_type")
+public class FileTypeEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long idStateEntity;
+    private Long idFileType;
 
     private String name;
 
     private String description;
 
-    @OneToMany
     @JsonIgnore
-    private List<PropertyEntity> properties;
+    @OneToMany
+    private List<FileEntity> files;
 
     @CreationTimestamp
     private Calendar dateCreation;

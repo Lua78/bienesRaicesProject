@@ -9,21 +9,18 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.util.Calendar;
 import java.util.List;
 
-@Data
 @Entity
-public class OwnerPropertyEntity {
+@Data
+@Table(name = "property_type")
+public class PropertyTypeEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long idOwnerProperty;
+    private Long idPropertyType;
 
     private String name;
 
-    private String lastName;
-
-    private String email;
-
-    private String identityCard;
+    private String description;
 
     @OneToMany
     @JsonIgnore
@@ -36,4 +33,7 @@ public class OwnerPropertyEntity {
     private Calendar dateLastUpdate;
 
     private boolean active = true;
+
+
+
 }

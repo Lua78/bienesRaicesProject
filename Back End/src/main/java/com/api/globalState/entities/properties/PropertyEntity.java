@@ -3,7 +3,6 @@ package com.api.globalState.entities.properties;
 
 import com.api.globalState.entities.FileEntity;
 import com.api.globalState.entities.auth.UserEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,6 +14,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "property")
 public class PropertyEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,13 +33,13 @@ public class PropertyEntity {
     private List<FileEntity> files;
 
     @ManyToOne
-    private OwnerPropertyEntity owner;
+    private PropertyOwnerEntity owner;
 
     @ManyToOne
     private UserEntity creator;
 
     @ManyToOne
-    private StatePropertyEntity stateProperty;
+    private PropertyStateEntity stateProperty;
 
     private Long rooms;
 

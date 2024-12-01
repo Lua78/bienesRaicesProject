@@ -11,6 +11,7 @@ import java.util.List;
 
 @Data
 @Entity
+@Table(name = "permission")
 public class PermissionEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
