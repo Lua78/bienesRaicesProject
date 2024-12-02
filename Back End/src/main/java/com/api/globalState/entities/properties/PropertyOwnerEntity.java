@@ -6,6 +6,7 @@ import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.net.Inet4Address;
 import java.util.Calendar;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class PropertyOwnerEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long idPropertyOwner;
+    private Integer idPropertyOwner;
 
     private String name;
 

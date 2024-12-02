@@ -2,6 +2,7 @@ package com.api.globalState.controllers.interfaces;
 
 import com.api.globalState.dtos.request.SearchParamsDto;
 import com.api.globalState.entities.properties.PropertyEntity;
+import com.api.globalState.entities.properties.PropertyOwnerEntity;
 import com.api.globalState.utils.GenericResponse;
 import com.api.globalState.utils.exceptions.ResponseException;
 import org.springframework.http.ResponseEntity;
@@ -13,19 +14,19 @@ import java.util.List;
 public interface IPropertyOwnerController {
 
     @GetMapping
-    ResponseEntity<GenericResponse<List<PropertyEntity>>> getAllOwners(@RequestParam SearchParamsDto params);
+    ResponseEntity<GenericResponse<List<PropertyOwnerEntity>>> getAllOwners(@RequestParam SearchParamsDto params);
 
     @GetMapping("/{idOwner}")
-    ResponseEntity<GenericResponse<PropertyEntity>> getOwner(@PathVariable Integer idOwner) throws ResponseException;
+    ResponseEntity<GenericResponse<PropertyOwnerEntity>> getOwner(@PathVariable Integer idOwner) throws ResponseException;
 
     @PutMapping("/{idOwner}")
-    ResponseEntity<GenericResponse<PropertyEntity>> updateOwner(@PathVariable Integer idOwner, @RequestBody PropertyEntity property, @RequestHeader(name = "Authorization") String token) throws ResponseException;
+    ResponseEntity<GenericResponse<PropertyOwnerEntity>> updateOwner(@PathVariable Integer idOwner, @RequestBody PropertyOwnerEntity entity, @RequestHeader(name = "Authorization") String token) throws ResponseException;
 
     @PostMapping
-    ResponseEntity<GenericResponse<PropertyEntity>> createOwner(@RequestBody PropertyEntity property, @RequestHeader(name = "Authorization") String token) throws ResponseException;
+    ResponseEntity<GenericResponse<PropertyOwnerEntity>> createOwner(@RequestBody PropertyOwnerEntity entity, @RequestHeader(name = "Authorization") String token) throws ResponseException;
 
     @DeleteMapping("/{idOwner}")
-    ResponseEntity<GenericResponse<PropertyEntity>> deleteOwner(@PathVariable Integer idOwner, @RequestHeader(name = "Authorization") String token) throws ResponseException;
+    ResponseEntity<GenericResponse<PropertyOwnerEntity>> deleteOwner(@PathVariable Integer idOwner, @RequestHeader(name = "Authorization") String token) throws ResponseException;
 }
 
 

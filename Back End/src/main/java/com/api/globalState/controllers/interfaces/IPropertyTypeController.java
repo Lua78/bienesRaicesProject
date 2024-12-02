@@ -14,17 +14,17 @@ import java.util.List;
 public interface IPropertyTypeController {
 
     @GetMapping
-    ResponseEntity<GenericResponse<List<PropertyTypeEntity>>> getAllProperties(@RequestParam SearchParamsDto params);
+    ResponseEntity<GenericResponse<List<PropertyTypeEntity>>> getAll(@RequestParam SearchParamsDto params);
 
     @GetMapping("/{id}")
-    ResponseEntity<GenericResponse<PropertyTypeEntity>> getProperty(@PathVariable Integer id) throws ResponseException;
+    ResponseEntity<GenericResponse<PropertyTypeEntity>> getOne(@PathVariable Integer id) throws ResponseException;
 
     @PutMapping("/{id}")
-    ResponseEntity<GenericResponse<PropertyTypeEntity>>  updateProperty(@PathVariable Integer id, @RequestBody PropertyEntity property, @RequestHeader(name = "Authorization") String token) throws ResponseException;
+    ResponseEntity<GenericResponse<PropertyTypeEntity>>  update(@PathVariable Integer id, @RequestBody PropertyTypeEntity property, @RequestHeader(name = "Authorization") String token) throws ResponseException;
 
     @PostMapping
-    ResponseEntity<GenericResponse<PropertyTypeEntity>> createProperty(@RequestBody PropertyEntity property, @RequestHeader(name = "Authorization") String token) throws ResponseException;
+    ResponseEntity<GenericResponse<PropertyTypeEntity>> create(@RequestBody PropertyTypeEntity property, @RequestHeader(name = "Authorization") String token) throws ResponseException;
 
     @DeleteMapping("/{id}")
-    ResponseEntity<GenericResponse<PropertyTypeEntity>> deleteProperty(@PathVariable Integer id, @RequestHeader(name = "Authorization") String token) throws ResponseException;
+    ResponseEntity<GenericResponse<PropertyTypeEntity>> delete(@PathVariable Integer id, @RequestHeader(name = "Authorization") String token) throws ResponseException;
 }

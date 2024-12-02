@@ -1,6 +1,5 @@
 package com.api.globalState.services.implementations;
 
-import com.api.globalState.entities.properties.PropertyEntity;
 import com.api.globalState.entities.properties.PropertyOwnerEntity;
 import com.api.globalState.repositories.properties.PropertyOwnerRepository;
 import com.api.globalState.services.interfaces.IPropertyOwnerService;
@@ -8,40 +7,46 @@ import com.api.globalState.utils.exceptions.ResponseException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
 public class PropertyOwnerService implements IPropertyOwnerService {
-    private final PropertyOwnerRepository propertyOwnerRepository;
+    private final PropertyOwnerRepository repository;
 
-    public PropertyOwnerService(PropertyOwnerRepository propertyOwnerRepository) {
-        this.propertyOwnerRepository = propertyOwnerRepository;
+    public PropertyOwnerService(PropertyOwnerRepository repository) {
+        this.repository = repository;
     }
 
     @Override
-    public PropertyOwnerEntity getById(Integer idProperty) throws ResponseException {
-        return null;
+    public PropertyOwnerEntity getById(Integer id) throws ResponseException {
+        return this.getEntity(id);
     }
 
     @Override
-    public PropertyOwnerEntity updateOwner(PropertyOwnerEntity entity, Integer idProperty) throws ResponseException {
-        return null;
+    public PropertyOwnerEntity update(PropertyOwnerEntity entity, Integer id) throws ResponseException {
+        this.getEntity(id);
+        entity.setIdPropertyOwner(id);
+        return repository.save(entity);
     }
 
     @Override
-    public PropertyOwnerEntity deleteOwner(Integer idProperty) throws ResponseException {
-        return null;
-    }
-    @Override
-    public List<PropertyOwnerEntity> getAll(){
-        return propertyOwnerRepository.findAllByActiveTrue();
+    public PropertyOwnerEntity delete(Integer id) throws ResponseException {
+        PropertyOwnerEntity propertyOwnerEntity = this.getEntity(id);
+        propertyOwnerEntity.setActive(false);
+        return repository.save(propertyOwnerEntity);
     }
 
     @Override
-    public PropertyOwnerEntity createOwner(PropertyOwnerEntity entity) {
-        return null;
+    public List<PropertyOwnerEntity> getAll() {
+        return repository.findAllByActiveTrue();
     }
 
-    private PropertyOwnerEntity getProperty(Integer idOwner) throws ResponseException {
-        return propertyOwnerRepository.findById(idOwner).orElseThrow(()-> new ResponseException("Property owner not found"));
+    @Override
+    public PropertyOwnerEntity create(PropertyOwnerEntity entity) {
+        return repository.save(entity);
+    }
+
+    private PropertyOwnerEntity getEntity(Integer idOwner) throws ResponseException {
+        return repository.findById(idOwner).orElseThrow(() -> new ResponseException("Property owner not found"));
     }
 
 }

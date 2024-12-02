@@ -7,9 +7,9 @@ import com.api.globalState.utils.exceptions.ResponseException;
 import java.util.List;
 
 public interface IPropertyOwnerService {
-    PropertyOwnerEntity getById(Integer idProperty) throws ResponseException;
-    PropertyOwnerEntity updateOwner(PropertyOwnerEntity entity, Integer idProperty) throws ResponseException;
-    PropertyOwnerEntity deleteOwner(Integer idProperty) throws ResponseException;
+    PropertyOwnerEntity getById(Integer id) throws ResponseException;
+    PropertyOwnerEntity update(PropertyOwnerEntity entity, Integer id) throws ResponseException;
+    PropertyOwnerEntity delete(Integer id) throws ResponseException;
     List<PropertyOwnerEntity> getAll();
-    PropertyOwnerEntity createOwner(PropertyOwnerEntity entity);
+    PropertyOwnerEntity create(PropertyOwnerEntity entity);
 }
