@@ -1,5 +1,6 @@
 package com.api.globalState.controllers.interfaces;
 
+import com.api.globalState.dtos.request.PropertyDto;
 import com.api.globalState.dtos.request.SearchParamsDto;
 import com.api.globalState.entities.properties.PropertyEntity;
 import com.api.globalState.utils.GenericResponse;
@@ -22,7 +23,7 @@ public interface IPropertyController {
     ResponseEntity<GenericResponse<PropertyEntity>>  updateProperty(@PathVariable Integer idProperty, @RequestBody PropertyEntity property, @RequestHeader(name = "Authorization") String token) throws ResponseException;
 
     @PostMapping
-    ResponseEntity<GenericResponse<PropertyEntity>> createProperty(@RequestBody PropertyEntity property, @RequestHeader(name = "Authorization") String token) throws ResponseException;
+    ResponseEntity<GenericResponse<PropertyEntity>> createProperty(@RequestBody PropertyDto property, @RequestHeader(name = "Authorization") String token) throws ResponseException;
 
     @DeleteMapping("/{idProperty}")
     ResponseEntity<GenericResponse<PropertyEntity>> deleteProperty(@PathVariable Integer idProperty, @RequestHeader(name = "Authorization") String token) throws ResponseException;

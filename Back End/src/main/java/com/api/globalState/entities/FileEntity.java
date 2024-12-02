@@ -21,8 +21,7 @@ public class FileEntity {
 
     private String path;
 
-    @ManyToOne
-    private FileTypeEntity typeFile;
+    private String type;
 
     @CreationTimestamp
     private Calendar dateCreation;

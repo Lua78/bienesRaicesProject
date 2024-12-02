@@ -1,6 +1,7 @@
 package com.api.globalState.controllers.implementations;
 
 import com.api.globalState.controllers.interfaces.IPropertyController;
+import com.api.globalState.dtos.request.PropertyDto;
 import com.api.globalState.dtos.request.SearchParamsDto;
 import com.api.globalState.entities.properties.PropertyEntity;
 import com.api.globalState.services.implementations.PropertyService;
@@ -41,7 +42,7 @@ public class PropertyController implements IPropertyController {
     }
 
     @Override
-    public ResponseEntity<GenericResponse<PropertyEntity>> createProperty(PropertyEntity property, String token) throws ResponseException {
+    public ResponseEntity<GenericResponse<PropertyEntity>> createProperty(PropertyDto property, String token) throws ResponseException {
         if(!jwtManager.isThisRole(token, "admin"))
             throw new ResponseException("dont have permission for this path");
         return ResponseEntity.ok().body(new GenericResponse<>("success", propertyService.createProperty(property)));

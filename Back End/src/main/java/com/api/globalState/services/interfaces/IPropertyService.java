@@ -1,5 +1,6 @@
 package com.api.globalState.services.interfaces;
 
+import com.api.globalState.dtos.request.PropertyDto;
 import com.api.globalState.entities.properties.PropertyEntity;
 import com.api.globalState.utils.exceptions.ResponseException;
 import org.hibernate.mapping.Property;
@@ -11,5 +12,5 @@ public interface IPropertyService {
     PropertyEntity updateProperty(PropertyEntity entity, Integer idProperty) throws ResponseException;
     PropertyEntity deleteProperty(Integer idProperty) throws ResponseException;
     List<PropertyEntity> getAll();
-    PropertyEntity createProperty(PropertyEntity entity);
+    PropertyEntity createProperty(PropertyDto body);
 }
