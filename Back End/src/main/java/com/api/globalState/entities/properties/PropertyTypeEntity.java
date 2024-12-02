@@ -16,7 +16,7 @@ public class PropertyTypeEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    private Long idPropertyType;
+    private Integer idPropertyType;
 
     private String name;
 
