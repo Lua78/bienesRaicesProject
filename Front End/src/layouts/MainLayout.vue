@@ -11,7 +11,7 @@
         </div>
 
         <q-select v-model="filterBy" options-dense outlined dense :options="options" option-value="name"
-          option-label="name" class="q-ml-sm col-3 my-input" emit-value map-options item-value="name"
+          option-label="name" class="q-ml-sm col-3 my-input" emit-value map-options item-value="idPropertyType"
           :clearable="false">
           <template v-slot:option="scope">
             <q-item v-bind="scope.itemProps" clickable v-ripple class="clean">
@@ -32,32 +32,33 @@
           </template>
         </q-select>
 
-        <div class="q-ml-sm my-input mw">
-          <span>Precio: {{ priceRange }}</span>
-          <q-range v-model="priceRange" :min="3000" :max="40000" />
-        </div>
+        <q-select v-model="state" options-dense outlined dense :options="states" option-value="name"
+          option-label="name" class="q-ml-sm col-3 my-input" emit-value map-options item-value="idPropertyState"
+          :clearable="false">
+          <template v-slot:option="item">
+            <q-item v-bind="item.itemProps" clickable v-ripple class="clean">
+              <q-item-section avatar>
+                <q-icon :name="item.opt.icon" />
+              </q-item-section>
+              <q-item-section>{{ item.opt.name }}</q-item-section>
+            </q-item>
+          </template>
 
-        <q-toggle v-model="onlyAvailable" label="Solo disponibles" class="q-ml-sm my-input mw" />
+          <template v-slot:selected-item="item">
+            <q-item v-bind="item.itemProps" class="clean">
+              <q-item-section avatar class="clean">
+                <q-icon :name="item.opt.icon" />
+              </q-item-section>
+              <q-item-section>{{ item.opt.name }}</q-item-section>
+            </q-item>
+          </template>
+        </q-select>
+
 
       </q-toolbar>
     </q-header>
 
     <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
-      <!-- drawer content -->
-      <q-list>
-        <q-item clickable v-ripple>
-          <q-item-section>Más populares</q-item-section>
-        </q-item>
-        <q-item clickable v-ripple>
-          <q-item-section>Mejor oferta</q-item-section>
-        </q-item>
-        <q-item clickable v-ripple>
-          <q-item-section>Solo Venta</q-item-section>
-        </q-item>
-        <q-item clickable v-ripple>
-          <q-item-section>Solo Alquiler</q-item-section>
-        </q-item>
-      </q-list>
       <div class="q-pa-md">
         <img src="/assets/logo.png" class="img-acoplada">
 
@@ -68,45 +69,74 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view :search-query="searchQuery" :type="filterBy" :state="state" />
     </q-page-container>
-
   </q-layout>
 </template>
 
 <script setup>
 import { ref } from 'vue'
 
-const leftDrawerOpen = ref(false)
 const rightDrawerOpen = ref(false)
 const searchQuery = ref('')
-const priceRange = ref([3000, 40000])
-const onlyAvailable = ref(false)
+
 const filterBy = ref({
-  icon: "home",
-  name: "Todos"
+  icon: "filter_list",
+  name: "Tipo de propiedad",
+  idPropertyType: null,
+})
+
+const state = ref({
+  icon: "filter_list",
+  name: "Estado de compra",
+  idPropertyState: null
 })
 
 const options = [
   {
-    icon: "home",
-    name: "Todos"
+    icon: "filter_list",
+    name: "Tipo de propiedad",
+    idPropertyType: null,
   },
   {
     icon: "home",
-    name: "Casas"
+    name: "Casa",
+    idPropertyType: 1,
+
   },
   {
     icon: "store",
-    name: "Bodegas"
+    name: "Bodega",
+    idPropertyType: 2,
+  },
+  {
+    icon: "build",
+    name: "Edificio",
+    idPropertyType: 2,
   },
   {
     icon: "apartment",
-    name: "Departamentos"
+    name: "Departamento",
+    idPropertyType: 3,
   }
 ]
-
-
+const states = [
+  {
+    icon: "filter_list",
+    name: "Estado de compra",
+    idPropertyState: null
+  },
+  {
+    icon: "home",
+    name: "Venta",
+    idPropertyState: 1,
+  },
+  {
+    icon: "house",
+    name: "Alquiler",
+    idPropertyState: 2,
+  },
+]
 
 </script>
 
@@ -140,6 +170,12 @@ const options = [
   background-color: white;
   border: none;
   border-radius: 10px;
+  display: flex;
+  max-height: 40px;
+  align-content: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
 }
 
 .my-search {

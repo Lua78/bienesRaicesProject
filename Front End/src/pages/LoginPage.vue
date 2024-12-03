@@ -12,15 +12,41 @@
       </q-card-section>
     </q-card>
   </div>
-
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { api } from 'src/boot/axios';
 
-const user = ref('')
-const pass = ref('')
+const user = ref('');
+const pass = ref('');
 
+const login = async () => {
+  if (!user.value || !pass.value) {
+    console.error('El nombre de usuario y la contraseña son requeridos');
+    return;
+  }
+
+  try {
+    const response = await api.post('/auth/login', {
+      username: user.value,
+      password: pass.value
+    });
+    if (response.data && response.data.body.token) {
+      // Guardar el token en el localStorage
+      localStorage.setItem('authToken', response.data.body.token);
+      console.log('Token guardado:', response.data.authToken);
+
+      // Redirigir a otra página (ejemplo)
+      window.location.href = '/admin';  // Ajusta según la ruta que necesitess
+    } else {
+      s
+      console.error('No se recibió token de autenticación');
+    }
+  } catch (error) {
+    console.error('Error al intentar iniciar sesión:', error);
+  }
+}
 </script>
 
 <style scoped>

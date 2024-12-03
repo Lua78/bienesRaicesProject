@@ -4,7 +4,9 @@
 
     <q-card-section class="q-pa-sm col">
       <div class="text-subtitle2">{{ property.name }}</div>
-      <div class="text-body2">{{ property.price }}</div>
+      <div class="text-body3"> <b>Tipo de propiedad: </b> {{ property.type.name }}</div>
+      <div class="text-body3"><b>Detalles de la propiedad: </b> {{ property.details }}</div>
+      <div class="text-body2"><b>Precio: </b> C${{ property.price }}</div>
       <br>
       <q-chip class="q-pa-sm" dense icon="place" :label="property.address" />
       <br>
@@ -53,13 +55,13 @@ const onViewClick = () => {
 .small-card {
   width: 100%;
   display: flex;
-  max-height: 200px;
+  max-height: 400px;
   /* Ajusta la altura máxima de la tarjeta */
 }
 
 .small-image {
   width: 300px;
-  height: 190px;
+  height: 250px;
   /* Ajusta el tamaño de la imagen */
   object-fit: cover;
   /* Asegura que la imagen cubra su espacio correctamente */

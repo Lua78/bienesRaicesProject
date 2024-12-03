@@ -16,7 +16,8 @@
 
       <q-card-section class="q-pa-sm col section">
         <div class="text-subtitle2">{{ property.name }}</div>
-        <div class="text-body3">{{ property.details }}</div>
+        <div class="text-body3"> <b>Tipo de propiedad: </b> {{ property.type.name }}</div>
+        <div class="text-body3"><b>Detalles de la propiedad: </b> {{ property.details }}</div>
         <div class="text-body2">{{ property.price }}</div>
         <br>
         <q-chip class="q-pa-sm" dense icon="place" :label="property.address" />

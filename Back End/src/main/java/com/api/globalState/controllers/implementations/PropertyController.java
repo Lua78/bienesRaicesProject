@@ -28,7 +28,7 @@ public class PropertyController implements IPropertyController {
 
     @Override
     public ResponseEntity<GenericResponse<List<PropertyResponseDto>>> getAllProperties(HashMap<String,String> params) {
-        return ResponseEntity.ok().body(new GenericResponse<>("success", propertyService.getAll()));
+        return ResponseEntity.ok().body(new GenericResponse<>("success", propertyService.getAll(params)));
     }
 
     @Override

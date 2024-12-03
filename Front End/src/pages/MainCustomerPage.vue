@@ -8,13 +8,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { api } from 'boot/axios' // Importa la instancia de axios configurada
 
 import PropertyItem from './PropertyItem.vue'
+const props = defineProps({
+  searchQuery: String,
+  type: String,
+  state: String
+})
 
-// Declaramos una variable reactiva para las propiedades
 const properties = ref([])
+
+console.log(props.searchQuery, props.filterBym, props.priceRange)
 
 // Usamos onMounted para cargar las propiedades cuando el componente se monta
 onMounted(async () => {
@@ -27,4 +33,29 @@ onMounted(async () => {
     console.error('Error al obtener las propiedades:', error)
   }
 })
+// Función para filtrar las propiedades
+const filterProperties = async () => {
+  let params = "";
+
+  if (typeof props.searchQuery === "string" && props.searchQuery.trim() !== "" && typeof props.searchQuery === "string") {
+    params += `?search=${encodeURIComponent(props.searchQuery)}`;
+  }
+
+  if (props.state !== null && props.state !== undefined && typeof props.state === "string") {
+    params += (params ? "&" : "?") + `state=${encodeURIComponent(props.state)}`;
+  }
+  if (props.type !== null && props.type !== undefined && typeof props.type === "string") {
+    params += (params ? "&" : "?") + `type=${encodeURIComponent(props.type)}`;
+  }
+  const response = await api.get('/properties' + params)
+  // Asignamos los datos a la variable reactiva
+  properties.value = response.data.body
+  console.log("URL con parámetros:", params);
+};
+
+
+// Observadores para detectar cambios en las props y volver a filtrar
+watch(() => props.searchQuery, filterProperties)
+watch(() => props.type, filterProperties)
+watch(() => props.state, filterProperties)
 </script>
