@@ -12,6 +12,7 @@ import com.api.globalState.utils.exceptions.ResponseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -25,7 +26,7 @@ public class PropertyOwnerController implements IPropertyOwnerController {
     }
 
     @Override
-    public ResponseEntity<GenericResponse<List<PropertyOwnerEntity>>> getAllOwners(SearchParamsDto params) {
+    public ResponseEntity<GenericResponse<List<PropertyOwnerEntity>>> getAllOwners(HashMap<String,String> params) {
         return ResponseEntity.ok().body(new GenericResponse<>("success", service.getAll()));
     }
 

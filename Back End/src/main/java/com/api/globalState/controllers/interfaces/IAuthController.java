@@ -9,6 +9,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RequestMapping("/auth")
 public interface IAuthController {
 
@@ -17,6 +18,6 @@ public interface IAuthController {
 
 
     @PostMapping("/login")
-    ResponseEntity<GenericResponse<LoginResponseDto>> login(@RequestBody LoginDto body);
+    ResponseEntity<GenericResponse<LoginResponseDto>> login(@RequestBody LoginDto body) throws ResponseException;
 
 }

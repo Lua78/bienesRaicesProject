@@ -23,6 +23,11 @@ public class GlobalExceptionHandler {
     protected ResponseEntity<GenericResponse<String>> handleIntegrityException(DataIntegrityViolationException ex) {
         return ResponseEntity.badRequest().body(new GenericResponse<>("A database constraint was violated: " + ex.getMessage()));
     }
+    @ExceptionHandler(RuntimeException.class)
+    protected ResponseEntity<GenericResponse<String>> handleRuntimeException(DataIntegrityViolationException ex) {
+        return ResponseEntity.badRequest().body(new GenericResponse<>("A database constraint was violated: " + ex.getMessage()));
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<GenericResponse<Map<String, String>>> handleValidationsException(MethodArgumentNotValidException ex) {

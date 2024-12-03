@@ -46,7 +46,7 @@ public class AuthService implements IAuthService {
             login = loginRepository.save(login);
 
             String token = jwtManager.generateToken(
-                    login.getIdLogin().intValue(),
+                    login.getUser().getIdUser(),
                     login.getUsername(),
                     login.getRol().getName()
             );
@@ -62,7 +62,7 @@ public class AuthService implements IAuthService {
 
         if(!Hash.sha3256(data.getPassword()).equals(loginEntity.getPassword()))
             throw new ResponseException("Wrong username or password");
-        String token = jwtManager.generateToken(loginEntity.getIdLogin(),loginEntity.getUsername(),loginEntity.getRol().getName());
+        String token = jwtManager.generateToken(loginEntity.getUser().getIdUser(),loginEntity.getUsername(),loginEntity.getRol().getName());
 
         return new LoginResponseDto(loginEntity, token);
     }

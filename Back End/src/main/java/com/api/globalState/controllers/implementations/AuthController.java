@@ -27,7 +27,8 @@ public class AuthController implements IAuthController {
     }
 
     @Override
-    public ResponseEntity<GenericResponse<LoginResponseDto>> login(LoginDto body) {
-        return null;
+    public ResponseEntity<GenericResponse<LoginResponseDto>> login(LoginDto body) throws ResponseException {
+        return ResponseEntity.ok().body(new GenericResponse<>(authService.login(body),"OK", HttpStatus.OK));
+
     }
 }

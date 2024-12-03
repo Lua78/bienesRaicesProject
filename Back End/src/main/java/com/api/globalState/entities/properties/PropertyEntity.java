@@ -39,6 +39,9 @@ public class PropertyEntity {
     private UserEntity creator;
 
     @ManyToOne
+    private PropertyTypeEntity type;
+
+    @ManyToOne
     private PropertyStateEntity stateProperty;
 
     private Long rooms;

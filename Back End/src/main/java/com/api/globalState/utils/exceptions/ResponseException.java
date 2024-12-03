@@ -8,7 +8,7 @@ import java.util.List;
 public class ResponseException extends Exception {
 
     @Getter
-    private HttpStatus code = HttpStatus.BAD_REQUEST;
+    private Integer code = HttpStatus.BAD_REQUEST.value();
     private String message;
 
     public ResponseException(String msg) {
@@ -17,7 +17,7 @@ public class ResponseException extends Exception {
 
     public ResponseException(String msg, HttpStatus code) {
         super(msg);
-        this.code = code;
+        this.code = code.value();
     }
 
 }

@@ -4,6 +4,7 @@ import com.api.globalState.entities.auth.UserEntity;
 import com.api.globalState.entities.properties.PropertyEntity;
 import com.api.globalState.entities.properties.PropertyOwnerEntity;
 import com.api.globalState.entities.properties.PropertyStateEntity;
+import com.api.globalState.entities.properties.PropertyTypeEntity;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -18,10 +19,10 @@ public class PropertyDto {
     private String address;
     private BigDecimal price;
     private List<String> files; // Referencia a un DTO para archivos
-    private Integer ownerId; // ID del propietario
-    private Integer creatorId; // ID del creador
-    private Integer statePropertyId; // ID del estado de la propiedad
+    private Integer ownerId; // ID del propietario// ID del creador
+    private Integer statePropertyId;// ID del estado de la propiedad
     private Long rooms;
+    private Integer idType;
     private Long bathRooms;
     private Long totalArea;
     private Long yearsConstruction;
@@ -58,10 +59,10 @@ public class PropertyDto {
             propertyEntity.setOwner(owner);
         }
 
-        if (this.creatorId != null) {
-            UserEntity creator = new UserEntity();
-            creator.setIdUser(creatorId);
-            propertyEntity.setCreator(creator);
+        if (this.idType != null) {
+            PropertyTypeEntity typeEntity = new PropertyTypeEntity();
+            typeEntity.setIdPropertyType(idType);
+            propertyEntity.setType(typeEntity);
         }
 
         if (this.statePropertyId != null) {

@@ -8,13 +8,15 @@ import com.api.globalState.utils.exceptions.ResponseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RequestMapping("/property_states")
 public interface IPropertyStateController {
 
     @GetMapping
-    ResponseEntity<GenericResponse<List<PropertyStateEntity>>> getAll(@RequestParam SearchParamsDto params);
+    ResponseEntity<GenericResponse<List<PropertyStateEntity>>> getAll(@RequestParam HashMap<String,String> params);
 
     @GetMapping("/{id}")
     ResponseEntity<GenericResponse<PropertyStateEntity>> getOne(@PathVariable Integer id) throws ResponseException;

@@ -8,13 +8,15 @@ import com.api.globalState.utils.exceptions.ResponseException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RequestMapping("/owner")
 public interface IPropertyOwnerController {
 
     @GetMapping
-    ResponseEntity<GenericResponse<List<PropertyOwnerEntity>>> getAllOwners(@RequestParam SearchParamsDto params);
+    ResponseEntity<GenericResponse<List<PropertyOwnerEntity>>> getAllOwners(@RequestParam HashMap<String,String> params);
 
     @GetMapping("/{idOwner}")
     ResponseEntity<GenericResponse<PropertyOwnerEntity>> getOwner(@PathVariable Integer idOwner) throws ResponseException;

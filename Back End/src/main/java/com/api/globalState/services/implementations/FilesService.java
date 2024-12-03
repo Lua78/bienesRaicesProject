@@ -9,9 +9,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 
 @Service
@@ -78,21 +80,49 @@ public class FilesService implements IFilesService {
             throw new RuntimeException("Error al guardar el archivo", e);
         }
     }
+    public String getFileAsBase64(String filePath) {
+        File file = new File(filePath);
 
-    private String getFileExtensionFromMimeType(String mimeType) {
-        switch (mimeType) {
-            case "image/jpeg":
-                return "jpg";
-            case "image/png":
-                return "png";
-            case "application/pdf":
-                return "pdf";
-            case "text/plain":
-                return "txt";
-            case "application/json":
-                return "json";
-            default:
-                return "bin"; // Extensión por defecto para tipos desconocidos
+        if (!file.exists()) {
+            throw new RuntimeException("El archivo no existe: " + filePath);
+        }
+
+        try (FileInputStream fis = new FileInputStream(file)) {
+            byte[] fileBytes = new byte[(int) file.length()];
+            fis.read(fileBytes);
+            String base64Content = Base64.getEncoder().encodeToString(fileBytes);
+
+            String mimeType = getMimeType(file);
+
+            return "data:" + mimeType + ";base64," + base64Content;
+        } catch (IOException e) {
+            log.error("Error al leer el archivo: {}", filePath, e);
+            throw new RuntimeException("Error al leer el archivo", e);
         }
     }
+
+    private String getFileExtensionFromMimeType(String mimeType) {
+        return switch (mimeType) {
+            case "image/jpeg" -> "jpg";
+            case "image/png" -> "png";
+            case "application/pdf" -> "pdf";
+            case "text/plain" -> "txt";
+            case "application/json" -> "json";
+            default -> "bin"; // Extensión por defecto para tipos desconocidos
+        };
+    }
+    private String getMimeType(File file) {
+        String fileName = file.getName();
+        String extension = fileName.substring(fileName.lastIndexOf('.') + 1).toLowerCase();
+
+        return switch (extension) {
+            case "jpg", "jpeg" -> "image/jpeg";
+            case "png" -> "image/png";
+            case "pdf" -> "application/pdf";
+            case "txt" -> "text/plain";
+            case "json" -> "application/json";
+            default -> "application/octet-stream"; // Tipo binario genérico
+        };
+    }
+
 }

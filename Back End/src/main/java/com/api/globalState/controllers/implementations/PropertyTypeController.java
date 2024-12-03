@@ -2,18 +2,19 @@ package com.api.globalState.controllers.implementations;
 
 
 import com.api.globalState.controllers.interfaces.IPropertyTypeController;
-import com.api.globalState.dtos.request.SearchParamsDto;
-import com.api.globalState.entities.properties.PropertyEntity;
 import com.api.globalState.entities.properties.PropertyTypeEntity;
 import com.api.globalState.services.implementations.PropertyTypeService;
 import com.api.globalState.utils.GenericResponse;
 import com.api.globalState.utils.Jwt.JwtManager;
 import com.api.globalState.utils.exceptions.ResponseException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class PropertyTypeController implements IPropertyTypeController {
     private final PropertyTypeService service;
@@ -25,7 +26,7 @@ public class PropertyTypeController implements IPropertyTypeController {
     }
 
     @Override
-    public ResponseEntity<GenericResponse<List<PropertyTypeEntity>>> getAll(SearchParamsDto params) {
+    public ResponseEntity<GenericResponse<List<PropertyTypeEntity>>> getAll(HashMap<String, String> params) {
         return ResponseEntity.ok().body(new GenericResponse<>("success", service.getAll()));
     }
 
