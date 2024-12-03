@@ -1,54 +1,30 @@
 <template>
   <q-page>
     <q-list>
-      <property-item v-for="property in properties" :key="property.id" :property="property" />
+      <property-item v-for="property in properties" :key="property.idProperty" :property="property" />
     </q-list>
 
   </q-page>
 </template>
 
 <script setup>
+import { ref, onMounted } from 'vue'
+import { api } from 'boot/axios' // Importa la instancia de axios configurada
 
-import { ref } from 'vue'
 import PropertyItem from './PropertyItem.vue'
-const properties = ref([
-  {
-    id: 1,
-    title: 'Casa de con dos cuartos y un baño',
-    price: 'C$ 12000.00',
-    type: 'Venta',
-    location: 'Las Colinas, Managua',
-    available: true,
-    images: ['assets/casa.jpg']
-  },
-  {
-    id: 2,
-    title: 'Apartamentos disponibles',
-    price: 'C$ 1200.00',
-    location: 'Metrocentro, Managua',
-    type: 'Alquiler',
-    available: true,
-    images: ['assets/apartamentos.jpg']
-  },
-  {
-    id: 3,
-    title: 'Casa de con dos cuartos y un baño',
-    price: 'C$ 12000.00',
-    type: 'Venta',
-    location: 'Las Colinas, Managua',
-    available: true,
-    images: ['assets/casa.jpg']
-  },
-  {
-    id: 4,
-    title: 'Apartamentos disponibles',
-    price: 'C$ 1200.00',
-    type: 'Alquiler',
-    location: 'Metrocentro, Managua',
-    available: true,
-    images: []
-  },
-  // Agrega más propiedades aquí...
-])
 
+// Declaramos una variable reactiva para las propiedades
+const properties = ref([])
+
+// Usamos onMounted para cargar las propiedades cuando el componente se monta
+onMounted(async () => {
+  try {
+    // Realizamos la solicitud GET
+    const response = await api.get('/properties')
+    // Asignamos los datos a la variable reactiva
+    properties.value = response.data.body // Asegúrate de que la respuesta tenga las propiedades en "data"
+  } catch (error) {
+    console.error('Error al obtener las propiedades:', error)
+  }
+})
 </script>

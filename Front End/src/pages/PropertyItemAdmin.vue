@@ -3,14 +3,14 @@
     <q-img :src="image" :alt="property.title" class="small-image col-auto q-pa-md" />
 
     <q-card-section class=" dragElement  col">
-      <div class="text-subtitle2">{{ property.title }}</div>
+      <div class="text-subtitle2">{{ property.name }}</div>
       <div class="text-body2">{{ property.price }}</div>
       <br>
-      <q-chip class="q-pa-sm" dense icon="place" :label="property.location" />
+      <q-chip class="q-pa-sm" dense icon="place" :label="property.address" />
       <br>
       <q-chip dense color="green" icon="verified" label="Verificado" />
       <br>
-      <q-chip dense color="green" icon="check_circle" label="Disponible" v-if="property.available" />
+      <q-chip dense color="green" icon="check_circle" label="Disponible" v-if="property.active" />
       <div class="q-mt-md flex justify-between" style="padding: 0%;">
 
         <q-btn icon="visibility" class="rounded-borders" label="Ver" color="primary" @click="onViewClick" />
@@ -34,13 +34,7 @@ const viewDialog = ref(null)
 const props = defineProps({
   property: {
     type: {
-      id: Number,
-      title: String,
-      price: Number,
-      location: String,
-      type: String,
-      available: Boolean,
-      images: Array
+      Object
     },
     required: true
   }
@@ -54,7 +48,7 @@ const onEditClick = () => {
 }
 const image = ref('/assets/defaultHouse.webp')
 onMounted(() => {
-  const images = props.property.images
+  const images = props.property.files
   if (images.length > 0) {
     image.value = images[0];
     console.log(images)
